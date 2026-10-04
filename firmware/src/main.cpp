@@ -12,16 +12,14 @@ void log(const String& message);
 
 void onAudioStream(int16_t* audioData, size_t bytesRead, size_t audioPacketCount) {
     if (bytesRead > 0) {
-        // log the bytes read and audio packet count
-        String logMessage = "Audio Stream: Bytes Read = " + String(bytesRead) +
-                            ", Audio Packet Count = " + String(audioPacketCount) +
-                            "\n Audio Data (Base64): \n" + base64::encode((const uint8_t*)audioData, bytesRead);
-        log(logMessage);
+        // Direct write - no other operations in this hot path
+        Serial2.write((uint8_t*)audioData, bytesRead);
     }
 }
 
 void setup(){
     Serial.begin(115200);
+    Serial2.begin(921600); // Initialize Serial2 for RX2 pin (GPIO 17)
     createLogTask();
 
     registerAudioStreamCallback(onAudioStream);
