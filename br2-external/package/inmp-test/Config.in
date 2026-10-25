@@ -1,0 +1,5 @@
+config BR2_PACKAGE_INMP_TEST
+	bool "inmp-test"
+	help
+	  Userspace client that records INMP441 PCM from a serial port
+	  (or from the inmp-module line discipline with -l) into a WAV file.
