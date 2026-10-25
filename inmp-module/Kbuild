@@ -1,0 +1,2 @@
+obj-m += inmp-module.o
+inmp-module-y := inmp_ldisc.o inmp_parser.o

@@ -1,0 +1,15 @@
+config BR2_PACKAGE_INMP_MODULE
+	bool "inmp-module"
+	depends on BR2_LINUX_KERNEL
+	select BR2_PACKAGE_UTIL_LINUX
+	select BR2_PACKAGE_UTIL_LINUX_BINARIES
+	help
+	  INMP441 line discipline kernel module (N_DEVELOPMENT, 29).
+	  Decodes framed PCM from an ESP32 on a serial port. Attach with:
+	  ldattach -s 921600 29 /dev/ttyUSB0
+
+	  ldattach is provided by util-linux binaries, which this option
+	  selects.
+
+comment "inmp-module needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
